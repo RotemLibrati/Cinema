@@ -1,0 +1,94 @@
+﻿@model Cinema.ViewModel.MovieViewModel
+@using Cinema.Models
+@{
+    Layout = null;
+}
+
+
+<link href="@Url.Content("~/Content/Template.css")" rel="stylesheet" />
+<style>
+    div{
+        background-color: white;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    tr:nth-child(even) {
+        background-color: #eee;
+    }
+    tr:nth-child(odd) {
+        background-color: #fff;
+    }
+</style>
+<div>
+    <div class="displayerBoxes">
+        <center>
+            <table class="Displaytable">
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stage</th>
+                    <th>Limit</th>
+                    <th>Image</th>
+                    <th>Last Show</th>
+                    <th>Invite</th>
+
+                </tr>
+
+                @foreach (Movie m in Model.movies)
+                {
+                    if (m.DateMovie > DateTime.Now)
+                    {
+                        <tr>
+                            <td>@m.Title</td>
+                            <td>@m.DateMovie</td>
+                            <td>@m.Category</td>
+                            <td>@m.Price</td>
+                            <td>@m.Stage</td>
+                            <td>@m.Limit</td>
+                            @{string name = @m.Title.ToString() + ".jpg";
+                                DateTime temp = m.DateMovie;
+                                int count = 0;
+                            }
+
+                            <td> <img src="~/Images/@name" style="width:120px;height:120px;" /> </td>
+                            @{foreach (Movie t in Model.movies)
+                                {
+                                    if (t.Title == m.Title)
+                                    {
+                                        if (t.DateMovie < temp && t.DateMovie < DateTime.Now)
+                                        {
+                                            temp = t.DateMovie;
+                                            count++;
+                                        }
+                                    }
+                                }
+                                if (count == 0)
+                                {
+                                    temp = new DateTime(2000, 01, 01, 00, 00, 00);
+                                }
+                            }
+                            <td> @temp </td>
+
+
+                            <td> <input name="Title" type="button" value="Invite" onclick="location.href='@Url.Action("InviteMovie", "Ticket", new {Title = m.Title.ToString(), Date = m.DateMovie, StageName = m.Stage.ToString(), User = User.Identity.Name.ToString(), Price = m.Price})'" /></td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+
+            </table>
+            <h1>**If the date of last show is: 01-01-2000 00:00:00 it's mean that the movie dont showed before.   </h1>
+        </center>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model Cinema.ViewModel.CartViewModel
+
+@using Cinema.Models
+
+@{
+    <link href="@Url.Content("~/Content/Template.css")" rel="stylesheet" />
+}
+
+
+<style>
+    h2 {
+        color: red;
+        font-size: 30px;
+        font-weight: normal;
+        margin: 0 0 50px;
+        text-align: center;
+    }
+
+    .h12 {
+        color: #CEF0D4;
+        font-family: 'Rouge Script', cursive;
+        font-size: 130px;
+        font-weight: normal;
+        line-height: 48px;
+        margin: 0 0 50px;
+        text-align: center;
+        text-shadow: 1px 1px 2px #082b34;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+</head>
+
+<body>
+    <div>
+        <div class="h12">
+            <h1>
+                Managing a shopping cart
+            </h1>
+        </div>
+        @if (Model.carts.Count > 0)
+        {
+            <h2>Your ticket/s keeping for you for 10 minutes</h2>
+            foreach (Cart c in Model.carts)
+            {
+                <h4>Movie: @c.MovieName Date: @c.DateMovie Stage: @c.StageName Price: @c.Price Seat: @c.Seat A ticket was bought: @c.DateCreate</h4> <br />
+            }
+            <h3>Sum of the deal : @Model.Sum ₪</h3>
+            <input type="submit" value="Payment cart" class="btn btn-primary" onclick="location.href='@Url.Action("PaymentCart", "Cart", new { name = Model.carts[0].UserName, sum = Model.Sum })'" />
+        }
+        else 
+         { 
+            <h2>Your cart is empty</h2>
+        }
+
+
+    </div>
+</body>
+</html>

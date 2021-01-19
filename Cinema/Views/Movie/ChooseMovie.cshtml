@@ -1,0 +1,104 @@
+﻿@model Cinema.ViewModel.MovieViewModel
+@using Cinema.Models
+@{
+    ViewBag.Title = "ChooseMovie";
+}
+<link href="@Url.Content("~/Content/Template.css")" rel="stylesheet" />
+<style>
+    .header {
+        padding: 60px;
+        text-align: center;
+        color: #CCCC00;
+        font-size: 30px;
+    }
+    form{
+        text-align: center;
+    }
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #CCCC00;
+        border: none;
+        color: black;
+        padding: 12px 20px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .hRotem {
+        color: #CCCC00;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    h2 {
+        color: red;
+        font-size: 30px;
+        font-weight: normal;
+        margin: 0 0 50px;
+        text-align: center;
+    }
+    .h12 {
+        color: #CEF0D4;
+        font-family: 'Rouge Script', cursive;
+        font-size: 90px;
+        font-weight: normal;
+        line-height: 48px;
+        margin-top: 100px;
+        text-align: center;
+        text-shadow: 1px 1px 2px #082b34;
+    }
+</style>
+<br />
+<br />
+<div>
+    <h1 class="h12">
+        Serach Your Movie
+    </h1>
+    @if (TempData["Message"] != null)
+    {
+        <center>
+            <h2>@TempData["Message"]</h2>
+        </center>
+    }
+    <form action="Choose" method="post">
+        <h3 class="hRotem">Search a movie by name:</h3>
+        <select id="SearchBy" name="Title">
+            <option></option>
+            <option value="PrisonBreak">Prison Break</option>
+            <option>BatMan</option>
+            <option>Titanic</option>
+            <option>Rambo</option>
+            <option>Pokemon</option>
+            <option>SuperMan</option>
+            <option>SpiderMan</option>
+            <option value="ScaryMovie4">Scary Movie4</option>
+            <option>Fast&Furious</option>
+        </select>
+        <br /> <br />
+        <h3 class="hRotem">Search a movie by category:</h3>
+        <select id="SearchBy" name="Category">
+            <option></option>
+            <option> Action </option>
+            <option> Thriller </option>
+            <option> Drama </option>
+            <option> Comedy </option>
+            <option> Romantic </option>
+            <option> Fantasy </option>
+            <option> Horror </option>
+            <option> Kids </option>
+        </select>
+        <h3 class="hRotem">Search a movie by date:</h3>
+        <input type="datetime-local" name="DateMovie">
+        <h3 class="hRotem">Search a movie by age:</h3>
+        <input type="number" name="Limit">
+        <h3 class="hRotem">Search a movie by price:</h3>
+        <input type="number" name="Price"><br /><br />
+        <input type="submit" value="Search" /><br /><br />
+        <h3 class="hRotem">Search a movie by popular:</h3>
+
+
+    </form>
+    <form action="PopularMovie">
+        <input type="submit" value="Search by popular movie" onclick="location.href='@Url.Action("PopularMovie", "Movie")'" />
+    </form>
+</div>
+<br />
+<div>
+</div>

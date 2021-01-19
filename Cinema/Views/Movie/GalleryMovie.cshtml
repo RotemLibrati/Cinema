@@ -1,0 +1,114 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gallery Movies</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Image Gallery</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a name="Prison" href="@Url.Action("DetailsMovies", "Movie" , new {Title = "Prison Break" })" target="_blank">
+                        <img src="~/Images/PrisonBreak.jpg" alt="Fjords" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>Prison Break</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href=@Url.Action("DetailsMovies", "Movie" , new {Title = "Rambo" }) target="_blank">
+                        <img src="~/Images/Rambo.jpg" alt="Lights" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>Rambo</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href=@Url.Action("DetailsMovies", "Movie" , new {Title = "Titanic" }) target="_blank">
+                        <img src="~/Images/Titanic.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>Titanic</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href=@Url.Action("DetailsMovies", "Movie" , new {Title = "Pokemon" }) target="_blank">
+                        <img src="~/Images/Pokemon.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>Pokemon</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href=@Url.Action("DetailsMovies", "Movie" , new {Title = "Fast&Furious" }) target="_blank">
+                        <img src="~/Images/Fast&Furious.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>Fast&Furious</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href=@Url.Action("DetailsMovies", "Movie" , new {Title = "ScaryMovie4" }) target="_blank">
+                        <img src="~/Images/ScaryMovie4.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>ScaryMovie4</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="@Url.Action("DetailsMovies", "Movie" , new {Title = "SpiderMan" })" target="_blank">
+                        <img src="~/Images/SpiderMan.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>SpiderMan</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="@Url.Action("DetailsMovies", "Movie" , new {Title = "SuperMan" })" target="_blank">
+                        <img src="~/Images/SuperMan.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>SuperMan</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href=@Url.Action("DetailsMovies", "Movie" , new {Title = "BatMan" }) target="_blank">
+                        <img src="~/Images/Batman.jpg" style="width:250px;height:250px;">
+                        <div class="caption">
+                            <p>BatMan</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

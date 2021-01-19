@@ -1,0 +1,598 @@
+﻿@model Cinema.ViewModel.MovieTicketViewModel
+@using Cinema.Models
+
+<style>
+    body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    #Username {
+        border: none;
+        border-bottom: 1px solid;
+    }
+
+    .screen {
+        width: 100%;
+        height: 20px;
+        background: #4388cc;
+        color: #fff;
+        line-height: 20px;
+        font-size: 15px;
+    }
+
+    .smallBox::before {
+        content: ".";
+        width: 15px;
+        height: 15px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .greenBox::before {
+        content: "";
+        background: Green;
+    }
+
+    .redBox::before {
+        content: "";
+        background: Red;
+    }
+
+    .emptyBox::before {
+        content ="";
+        box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+        background-color: #ccc;
+    }
+
+    .seats {
+        border: 1px solid red;
+        background: yellow;
+    }
+
+
+
+    .seatGap {
+        width: 40px;
+    }
+
+    .seatVGap {
+        height: 40px;
+    }
+
+    table {
+        text-align: center;
+    }
+
+
+    .Displaytable {
+        text-align: center;
+    }
+
+        .Displaytable td, .Displaytable th {
+            border: 1px solid;
+            text-align: left;
+        }
+
+    textarea {
+        border: none;
+        background: transparent;
+    }
+
+
+
+    input[type=checkbox] {
+        width: 0px;
+        margin-right: 18px;
+    }
+
+        input[type=checkbox]:before {
+            content: "";
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+            background-color: #ccc;
+        }
+
+        input[type=checkbox]:checked:before {
+            background-color: red;
+            font-size: 15px;
+        }
+        
+        
+
+        input[type=checkbox]:checked:after {
+            background-color: red;
+            font-size: 15px;
+        }
+</style>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/Seating.js"></script>
+<body onload="onLoaderFunc()">
+
+    @if (Model.tickets != null)
+    {
+        <h1> @Model.StringMovie[0]  at stage: @Model.StringMovie[1] at @Model.DateMovie.ToString()</h1>
+    }   
+    @using (Html.BeginForm("Payment", "Ticket", new
+    {
+        Title = Model.StringMovie[0],
+        StageName = Model.StringMovie[1],
+        Price = Model.StringMovie[2],
+        DateMovie = Model.DateMovie
+    }))
+    {
+        <div class="seatStructure">
+            <center>
+
+                <table id="seatsBlock">
+                    <p id="notification"></p>
+                    <tr>
+                        <td colspan="14"><div class="screen">SCREEN</div></td>
+                        <td rowspan="20">
+                            @*<div class="smallBox greenBox">Selected Seat</div> <br />*@
+                            <div class="smallBox redBox">Your Choosen/Reserved Seat</div><br />
+                            <div class="smallBox emptyBox">Empty Seat</div><br />
+                        </td>
+
+                        <br />
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td></td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                    </tr>
+                    @if (Model.StageSeat >= 1)
+                    {
+                        <tr>
+                            <td>A</td>
+
+                            <td>
+                                <input type="checkbox" class="seats" value="A1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A1", true) } } }
+                            </td>
+
+                            <td>
+                                <input type="checkbox" class="seats" value="A2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A5", true) } } }
+                            </td>
+                            <td class="seatGap"></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="A12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "A12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("A12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 2)
+                    {
+                        <tr>
+                            <td>B</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="B12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "B12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("B12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 3)
+                    {
+                        <tr>
+                            <td>C</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="C12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "C12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("C12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 4)
+                    {
+                        <tr>
+                            <td>D</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="D12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "D12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("D12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 5)
+                    {
+                        <tr>
+                            <td>E</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="E12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "E12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("E12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    <tr class="seatVGap"></tr>
+                    @if (Model.StageSeat >= 6)
+                    {
+                        <tr>
+                            <td>F</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="F12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "F12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("F12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 7)
+                    {
+                        <tr>
+                            <td>G</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="G12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "G12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("G12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 8)
+                    {
+                        <tr>
+                            <td>H</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="H12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "H12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("H12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 9)
+                    {
+                        <tr>
+                            <td>I</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="I12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "I12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("I12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.StageSeat >= 10)
+                    {
+                        <tr>
+                            <td>J</td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J1" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J1" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J1", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J2" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J2" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J2", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J3" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J3" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J3", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J4" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J4" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J4", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J5" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J5" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J5", true) } } }
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J6" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J6" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J6", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J7" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J7" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J7", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J8" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J8" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J8", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J9" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J9" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J9", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J10" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J10" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J10", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J11" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J11" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J11", true) } } }
+                            </td>
+                            <td>
+                                <input type="checkbox" class="seats" value="J12" name="seat" @if (Model.tickets != null) { for (int i = 0; i < Model.tickets.Count; i++) { if (Model.tickets[i].Seat == "J12" && Model.tickets[i].MovieName == Model.StringMovie[0] && Model.tickets[i].DateMovie == Model.DateMovie) { @Html.CheckBox("J12", true) } } }
+                            </td>
+                        </tr>
+                    }
+                </table><br />
+                <input type="submit" value="Payment" class="btn btn-primary" />
+            </center>
+        </div>
+        <br /><br />
+    }
+   

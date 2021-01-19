@@ -1,0 +1,244 @@
+﻿@model Cinema.ViewModel.MovieViewModel
+@using Cinema.Models
+@{
+    Layout = null;
+}
+<link href="@Url.Content("~/Content/Template.css")" rel="stylesheet" />
+<style>
+    h12 {
+        color: cornflowerblue;
+        font-size: 30px;
+        font-weight: normal;
+        margin: 0 0 50px;
+        text-align: center;
+    }
+    p{
+
+        color: cornflowerblue;
+    }
+    img {
+        /*position: absolute;*/
+        /*top: 75%;*/
+        left: 75%;
+        border-radius: 50%;
+    }
+</style>
+<body>
+    @if (ViewData["Title"].ToString() == "Prison Break")
+    {
+        <p>
+            <h12>Prison Break  </h12><br />
+            Prison Break is an American television serial drama created by Paul Scheuring for Fox.<br />
+            The series revolves around two brothers, <br />Lincoln Burrows (Dominic Purcell) and Michael Scofield
+            (Wentworth Miller); <br />Burrows has been sentenced to death for a crime he did not commit, and
+            Scofield devises an elaborate plan to help his <br /> brother escape prison and clear his name.
+        
+        
+            The series was produced by Adelstein-Parouse Productions, in association <br /> with Original Film
+            and 20th Century Fox Television.<br /> Along with creator Paul Scheuring, the series is executive
+            produced by Matt Olmstead,<br /> Kevin Hooks, Marty Adelstein, Dawn Parouse, Neal H. Moritz,<br />
+            and Brett Ratner who directed the pilot episode.<br /> The series' theme music, composed by Ramin
+            Djawadi,<br /> was nominated for a Primetime Emmy Award in 2006.<br /> Prison Break is a joint
+            production between Original Film,<br /> Adelstein/Parouse Productions, and 20th Century <br /> Fox Television
+            and syndicated by 20th Television.<br />
+        
+        By Vikipedia</p><br />
+
+        <img src="~/Images/PrisonBreak.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "SpiderMan")
+    {
+        
+        <p>
+            <h12>SpiderMan</h12><br />
+            Spider-Man is a fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko.<br />
+            He first appeared in the anthology comic book Amazing Fantasy #15 <br /> (Aug. 1962) in the Silver Age of Comic Books.<br />
+            He appears in American comic books published by Marvel Comics,<br /> as well as in a number of movies, <br />
+            television shows, and video game adaptations set in the Marvel Universe.<br />
+
+
+            In the stories, Spider-Man is the alias of Peter Parker, <br />an orphan raised by his Aunt May and Uncle <br />
+            Ben in New York City after his parents Richard and Mary Parker died in a plane crash.<br />
+            Lee and Ditko had the character deal with the struggles of adolescence and financial issues,<br />
+            and accompanied him with many supporting characters, such as J. <br />
+            Jonah Jameson, Harry Osborn, Max Modell, romantic interests Gwen Stacy and Mary Jane Watson, <br />
+            and foes such as Doctor Octopus, the Green Goblin and Venom. <br />
+            His origin story has him acquiring spider-related abilities after a bite from a radioactive spider; <br />
+            these include clinging to surfaces, superhuman strength and agility, and detecting danger <br />
+            with his "spider-sense." <br />
+            He then builds wrist-mounted "web-shooter" devices that <br />shoot artificial spider-webbing of his own design.<br />
+
+            By Vikipedia
+        </p>
+        <img src="~/Images/SpiderMan.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "SuperMan")
+    {
+        <h12>SuperMan</h12>
+        <p>
+            <h12>SuperMan</h12><br />
+            Superman is a fictional superhero, who first appeared in <br /> American comic books published by DC Comics.<br />
+            The character was created by writer Jerry Siegel and artist Joe Shuster,<br /> and first appeared in the comic book Action <br />
+            Comics #1 (cover-dated June 1938 and published April 18, 1938 <br />
+            [1] Superman has been adapted to a number of other media including radio serials, <br />
+            novels, movies, television shows and theatre.<br />
+
+            Superman was born on the planet Krypton and was given the name Kal-El at birth.<br />
+            As a baby, his parents sent him to Earth in a small spaceship moments before Krypton was <br />
+            destroyed in a natural cataclysm. <br />
+            His ship landed in the American countryside, near the fictional town of Smallville.<br />
+            He was found and adopted by farmers Jonathan and Martha Kent, who named him Clark Kent. <br />
+            Clark developed various superhuman abilities, such as incredible strength and impervious skin.<br />
+            His foster parents advised him to use his abilities for the <br /> benefit of humanity, and he decided to fight crime as a vigilante. <br />
+            To protect his privacy, he changes into a colorful costume <br /> and uses the alias "Superman" when fighting crime.<br />
+            Clark Kent resides in the fictional American city of Metropolis,<br /> where he works as a journalist for the Daily Planet.<br />
+            Superman's supporting characters include his love interest and fellow journalist Lois Lane, <br />
+            Daily Planet photographer Jimmy Olsen and editor-in-chief Perry White.<br />
+            Superman has an extensive Rogues Gallery with his arch-enemy being supervillain Lex Luthor.<br />
+
+            By Vikipedia
+        </p>
+        <img src="~/Images/SuperMan.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "Titanic")
+    {
+        
+        <p>
+            <h12>Titanic</h12><br />
+            Titanic is a 1997 American epic romance and disaster film directed, written, co-produced,<br />
+            and co-edited by James Cameron. Incorporating both historical and fictionalized aspects,<br />
+            it is based on accounts of the sinking of the RMS Titanic,<br /> and stars Leonardo DiCaprio and Kate Winsletbr <br />
+            as members of different social classes who fall in love aboard the <br /> ship during its ill-fated maiden voyage. <br />
+
+            Cameron's inspiration for the film came from his fascination with shipwrecks;<br /> he felt a love story interspersed with <br />
+            the human loss would be essential to convey the emotional impact of the disaster. <br />
+            Production began in 1995, when Cameron shot footage of the actual Titanic wreck. The modern scenes on the <br />
+            research vessel were shot on board the Akademik Mstislav Keldysh, which Cameron had used as a base <br />
+            when filming the wreck. Scale models, computer-generated imagery, and a reconstruction of the Titanic <br />
+            built at Baja Studios were used to re-create the sinking. <br />
+            The film was co-financed by Paramount Pictures and 20th Century Fox;<br /> the former handled distribution in North America while <br />
+            the latter released the film internationally. <br />It was the most expensive film ever made at the time, <br />
+            with a production budget of $200 million.<br />
+
+            By Vikipedia
+        </p>
+        <img src="~/Images/Titanic.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "ScaryMovie4")
+    {
+        
+        <p>
+            <h12>Scary Movie 4</h12><br />
+            Scary Movie 4 is a 2006 American science fantasy horror comedy film and the fourth installment in <br />
+            the Scary Movie franchise, as well as the first film in the franchise to be released under The Weinstein <br />
+            Company banner since the purchase of Dimension Films from Disney.<br /> It was directed by David Zucker, <br />
+            written by Jim Abrahams, Craig Mazin, and Pat Proft,<br /> and produced by Robert K. Weiss and Craig Mazin.<br />
+
+            The film marks the final franchise appearances of the main stars, Anna Faris and Regina Hall <br />
+            (who portray Cindy and Brenda, respectively), and concludes the original story arc.<br />
+            This was initially intended to be the final film in the Scary Movie franchise, <br />
+            until Scary Movie 5 was released by The Weinstein Company on April 12, 2013, in a different storyline,<br />
+            with Simon Rex, Charlie Sheen, and Molly Shannon in different roles. <br />
+
+            By Vikipedia
+        </p>
+        <img src="~/Images/ScaryMovie4.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "Fast&Furious")
+    {
+        
+        <p>
+            <h12>Fast&Furious</h12><br />
+            Fast & Furious (originally The Fast and the Furious)<br /> is a media franchise centered on a series of action <br />
+            films that are largely concerned with illegal street racing, heists and spies. <br />
+            The franchise also includes short films, a television series, live shows, video games and <br />
+            theme park attractions. It is distributed by Universal Pictures.<br />
+
+            The first film was released in 2001, which began the original <br /> trilogy of films focused on illegal street <br />
+            racing, and culminated in the film The Fast and the Furious: Tokyo Drift (2006). <br />
+            The series went under a change with Fast & Furious (2009),<br /> which transitioned the series toward heists and spying, <br />
+            and was followed by four sequels. <br />
+            F9 is set to be released in 2021, with a tenth and eleventh film planned. <br />
+            The main films are collectively known as The Fast Saga.<br />
+            By Vikipedia. <br />
+        </p>
+        <img src="~/Images/Fast&Furious.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "Rambo")
+    {
+        
+        <p>
+            <h12>Rambo</h12><br />
+            Rambo is an American media franchise centered on a series of action films. <br />
+            There have been five films released so far in the series: First Blood (1982), <br />
+            Rambo: First Blood Part II (1985), Rambo III (1988), Rambo (2008) and Rambo: Last Blood (2019). <br />
+            The films follow John Rambo, a US Army veteran played by Sylvester Stallone,<br /> whose experience fighting in the Vietnam War <br />
+            traumatized him but also gave him superior military skills,<br /> which he has used to fight corrupt police officers, <br />
+            enemy troops and drug cartels. <br />
+            The first film in the series, First Blood, is an adaptation of the 1972 <br /> novel First Blood by David Morrell.<br />
+
+            The film series has grossed $819 million in total, with the most successful film, <br />
+            Rambo: First Blood Part II, grossing $300 million. <br />
+            Stallone co-wrote the screenplays of all five films, and directed Rambo. In addition to films, <br />
+            the franchise also spawned an animated television series, Rambo: The Force of Freedom, <br />
+            as well as comic books, novels, video games and a Bollywood remake.<br />
+
+            By Vikipedia
+        </p>
+        <img src="~/Images/Rambo.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "Pokemon")
+    {
+        
+        <p>
+            <h12>Pokemon</h12><br />
+            Pokémon,also known as Pocket Monsters in Japan, <br />is a Japanese media franchise managed by The Pokémon Company,<br />
+            a company founded by Nintendo, Game Freak, and Creatures. <br />
+            The franchise was created by Satoshi Tajiri in 1995,[4]  <br />and is centered on fictional creatures called "Pokémon", <br />
+            which humans, known as Pokémon Trainers, catch and train to battle each other for sport. <br />
+            Works within the franchise are set in the Pokémon universe. <br />
+            The English slogan for the franchise is "Gotta Catch 'Em All".<br />
+
+            The franchise began as Pocket Monsters Red and Green <br /> (later released outside of Japan as Pokémon Red and Blue), <br />
+            a pair of video games for the original Game Boy handheld systembr    that were developed by Game Freak and published by Nintendo in February 1996. <br />
+            It soon became a media mix franchise adapted into various different media.<br />Pokémon has since become the highest-grossing media franchise of all time,<br />
+            with $90 billion in total franchise revenue.<br /> The original video game series is the second-best-selling video game franchise (behind Nintendo's Mario franchise)<br />
+            with more than 368 million copies sold <br /> and one billion mobile downloads,<br />
+            and it spawned a hit anime television series that has become the most successful video game adaptation <br />
+            with over 20 seasons and 1,000 episodes in 169 countries. <br />
+            By Vikipedia
+        </p>
+        <img src="~/Images/Pokemon.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+    else if (ViewData["Title"].ToString() == "BatMan")
+    {
+        
+        <p>
+            <h12>BatMan</h12><br />
+            The fictional superhero Batman, who appears in American comic books published by DC Comics,<br />
+            has appeared in various films since his inception. Created by Bob Kane and Bill Finger,[1] <br />
+            the character first starred in two serial films in the 1940s: Batman and Batman and Robin. <br />
+            The character also appeared in the 1966 film Batman,<br /> which was a feature film adaptation of the 1960s Batman <br />
+            TV series starring Adam West and Burt Ward, who also starred in the film. Toward the end of the 1980s, <br />
+            the Warner Bros. studio began producing a series of feature films starring Batman, <br />
+            beginning with the 1989 film Batman, directed by Tim Burton and starring Michael Keaton. <br />
+            Burton and Keaton returned for the 1992 sequel Batman Returns, <br /> and in 1995, Joel Schumacher directed Batman Forever <br />
+            with Val Kilmer as Batman. Schumacher also directed the 1997 sequel Batman & Robin, which starred George <br />
+            Clooney. Batman Forever and Batman & Robin were poorly received by both critics and fans, <br />
+            leading to the cancellation of Batman Unchained.<br />
+
+
+            By Vikipedia
+        </p>
+        <img src="~/Images/Batman.jpg" style="width:500px;height:500px;" /> <br />
+        <input type="button" value="Tickets" onclick="location.href='@Url.Action("ShowSearch", "Movie")'" />
+    }
+</body>

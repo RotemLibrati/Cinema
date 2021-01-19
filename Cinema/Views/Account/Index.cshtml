@@ -1,0 +1,122 @@
+﻿@model Cinema.ViewModel.CartViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="@Url.Content("~/Content/Template.css")" rel="stylesheet" />
+<style>
+    .header {
+        padding: 60px;
+        text-align: center;
+        color: #CCCC00;
+        font-size: 30px;
+    }
+
+    .h12 {
+        color: #CEF0D4;
+        font-family: 'Rouge Script', cursive;
+        font-size: 130px;
+        font-weight: normal;
+        line-height: 48px;
+        margin: 0 0 50px;
+        text-align: center;
+        text-shadow: 1px 1px 2px #082b34;
+    }
+
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #CCCC00;
+        border: none;
+        color: black;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    h2 {
+        color: red;
+        font-size: 30px;
+        font-weight: normal;
+        margin: 0 0 50px;
+        text-align: center;
+    }
+</style>
+<div class="h12">
+    <h1>
+        Welcome to Cinema's Rotem
+    </h1>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <center>
+        <h2>@TempData["Message"]</h2>
+    </center>
+}
+@if (Request.IsAuthenticated)
+{
+    if (User.Identity.Name.ToString().Equals("Admin@gmail.com") || User.Identity.Name.ToString().Equals("admin@gmail.com"))
+    {
+        <center>
+            <h1>Admin Access</h1>
+            <input type="button" value="Create Movie" onclick="location.href='@Url.Action("Create", "Movie")'" />
+            <input type="button" value="Delete Movie" onclick="location.href='@Url.Action("Delete", "Movie")'" />
+            <input type="button" value="Update Price" onclick="location.href='@Url.Action("UpdatePriceTransition", "Movie")'" />
+            <input type="button" value="Create Stage" onclick="location.href='@Url.Action("CreateStage", "Stage")'" />
+        </center>
+    }
+    <center>
+        <h1>Hi @ViewData["Name"] @ViewData["Lname"]</h1>
+    </center>
+    @*<div class="header">
+            <h1>Index</h1>
+        </div>*@
+
+    <center>
+        <nav>
+            <ul>
+                <li onclick="location.href='@Url.Action("ShowSearch", "Movie")'">
+                    Choose Movie
+                    <span></span><span></span><span></span><span></span>
+                </li>
+                <li onclick="location.href='@Url.Action("GalleryMovie", "Movie")'">
+                    Gallery Movies
+                    <span></span><span></span><span></span><span></span>
+                </li>
+                <li onclick="location.href='@Url.Action("ShowCart", "Cart")'">
+                    Manage Cart
+                    <span></span><span></span><span></span><span></span>
+                </li>
+                <li onclick="location.href='@Url.Action("Contact", "Account")'">
+                    Contact
+                    <span></span><span></span><span></span><span></span>
+                </li>
+            </ul>
+        </nav>
+    </center>
+}
+else
+{
+    <center>
+        <nav>
+            <ul>
+                <li onclick="location.href='@Url.Action("Login", "Account")'">
+                    Login
+                    <span></span><span></span><span></span><span></span>
+                </li>
+                <li onclick="location.href='@Url.Action("Register", "Account")'">
+                    Register
+                    <span></span><span></span><span></span><span></span>
+                </li>
+                <li onclick="location.href='@Url.Action("ShowSearch", "Movie")'">
+                    Choose Movie
+                    <span></span><span></span><span></span><span></span>
+                </li>
+                <li onclick="location.href='@Url.Action("GalleryMovie", "Movie")'">
+                    Gallery Movies
+                    <span></span><span></span><span></span><span></span>
+                </li>
+            </ul>
+        </nav>
+    </center>
+}

@@ -1,0 +1,248 @@
+﻿@model Cinema.ViewModel.MovieTicketViewModel
+@using Cinema.Models
+
+@*@{
+        Layout = null;
+    }*@
+<link href="@Url.Content("~/Content/Template.css")" rel="stylesheet" />
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body,
+    html {
+        height: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        background-color: #e7e7e7;
+    }
+
+    .credit-card {
+        width: 360px;
+        height: 400px;
+        margin: 60px auto 0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: 1px 2px 3px 0 rgba(0,0,0,.10);
+    }
+
+    .form-header {
+        height: 60px;
+        padding: 20px 30px 0;
+        border-bottom: 1px solid #e1e8ee;
+    }
+
+    .form-body {
+        height: 340px;
+        padding: 30px 30px 20px;
+    }
+
+    .title {
+        font-size: 18px;
+        margin: 0;
+        color: #5e6977;
+    }
+
+    .card-number,
+    .cvv-input input,
+    .month select,
+    .year select {
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 14px;
+    }
+
+    .card-number,
+    .month select,
+    .year select {
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 14px;
+    }
+
+    .card-number,
+    .cvv-details,
+    .cvv-input input,
+    .month select,
+    .year select {
+        opacity: .7;
+        color: #86939e;
+    }
+
+    .card-number {
+        width: 100%;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        border: 2px solid #e1e8ee;
+        border-radius: 6px;
+    }
+
+    .month select,
+    .year select {
+        width: 145px;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        border: 2px solid #e1e8ee;
+        border-radius: 6px;
+        background: url('caret.png') no-repeat;
+        background-position: 85% 50%;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .month select {
+        float: left;
+    }
+
+    .year select {
+        float: left;
+    }
+
+    .cvv-input input {
+        float: left;
+        width: 145px;
+        padding-left: 20px;
+        border: 2px solid #e1e8ee;
+        border-radius: 6px;
+        background: #fff;
+    }
+
+    .cvv-details {
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 16px;
+        float: right;
+        margin-bottom: 20px;
+    }
+
+        .cvv-details p {
+            margin-top: 6px;
+        }
+
+
+
+
+
+    .proceed-btn a {
+        color: #fff;
+    }
+
+    .paypal-btn a {
+        color: rgba(242, 242, 242, .7);
+    }
+
+    .paypal-btn {
+        padding-right: 95px;
+        background: url('paypal32.png') no-repeat 65% 56% #009cde;
+    }
+
+    .btnProcced {
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        border-color: transparent;
+        border-radius: 6px;
+        background: #7dc855;
+    }
+
+    .btnPaypal {
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        border-color: transparent;
+        border-radius: 6px;
+        background: DeepSkyBlue;
+    }
+</style>
+
+
+@using (Html.BeginForm("ConfirmPayment", "Ticket", new
+{
+    T = Model.tickets[0].MovieName,
+    P = Model.tickets[0].Price,
+    Date = Model.tickets[0].DateMovie,
+    Us = Model.tickets[0].UserName,
+    St = Model.tickets[0].StageName,
+    Seats = Model.Seats
+}))
+{
+    <center> <h1>Sum of the deal @Model.Sum ₪  </h1></center>
+        <div class="form-header">
+
+            <h4 class="title">Credit card detail</h4>
+
+        </div>
+        <div class="form-body" required>
+            <!-- Card Number -->
+            <input type="text" class="card-number" placeholder="Card Number" name="CardNumber">
+
+            <!-- Date Field -->
+            <div class="date-field" required>
+                <div class="month">
+                    <select name="Month">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <div class="year">
+                    <select name="Year">
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Card Verification Field -->
+            <div class="card-verification" required>
+                <div class="cvv-input">
+                    <input type="text" placeholder="CVV" name="CVV">
+                </div>
+                <div class="cvv-details">
+                    <p>3 or 4 digits usually found <br> on the signature strip</p>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <input class="btnProcced" value="Proceed" type="submit" />
+            <input class="btnPaypal" value="Pay With Paypal" type="button"/>
+
+        </div>
+        }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <input type="submit" value="Add to cart" onclick="location.href='@Url.Action("AddToCart", "Cart", new
+                                                                {
+                                                                    T = Model.tickets[0].MovieName,
+                                                                    P = Model.tickets[0].Price,
+                                                                    Date = Model.tickets[0].DateMovie,
+                                                                    Us = Model.tickets[0].UserName,
+                                                                    St = Model.tickets[0].StageName,
+                                                                    Seats = Model.Seats
+                                                                }) '" />
+    }
+
+
+
+
+
