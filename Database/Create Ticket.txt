@@ -1,0 +1,14 @@
+drop table Ticket
+
+USE tempdb
+GO
+
+CREATE TABLE Ticket(
+MovieName nvarchar(50) NOT NULL,
+UserName nvarchar(50) NOT NULL,
+Price int NOT NULL,
+DateMovie Datetime NOT NULL,
+StageName nvarchar(1) NOT NULL,
+Seat nvarchar(3) NOT NULL
+primary key(Seat,DateMovie,StageName)
+);

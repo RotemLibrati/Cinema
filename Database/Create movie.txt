@@ -1,0 +1,57 @@
+drop table Movie;
+
+USE tempdb
+GO
+
+CREATE TABLE Movie(
+Title nvarchar(50) NOT NULL,
+DateMovie Datetime NOT NULL,
+Category nvarchar(50) NOT NULL,
+Price int NOT NULL,
+Stage nvarchar(1) NOT NULL,
+Limit int NOT NULL
+primary key(Title,DateMovie, Stage)
+);
+INSERT INTO Movie VALUES('PrisonBreak','01/13/2021 22:30:00', 'Thriller', 55, 'D', 14 );
+INSERT INTO Movie VALUES('PrisonBreak','02/24/2021 22:30:00', 'Thriller', 55, 'A', 14 );
+INSERT INTO Movie VALUES('PrisonBreak','04/17/2021 15:00:00', 'Thriller', 55, 'B', 14 );
+INSERT INTO Movie VALUES('PrisonBreak','03/09/2021 17:30:00', 'Thriller', 55, 'C', 14 );
+INSERT INTO Movie VALUES('PrisonBreak','02/19/2021 20:15:00', 'Thriller', 55, 'E', 14 );
+INSERT INTO Movie VALUES('BatMan','01/31/2021 17:30:00', 'Kids', 25, 'A', 0 );
+INSERT INTO Movie VALUES('BatMan','02/23/2021 21:00:00', 'Kids', 25, 'D', 0 );
+INSERT INTO Movie VALUES('BatMan','04/25/2021 20:15:00', 'Kids', 25, 'E', 0 );
+INSERT INTO Movie VALUES('BatMan','05/19/2021 17:30:00', 'Kids', 25, 'C', 0 );
+INSERT INTO Movie VALUES('SuperMan','01/02/2021 15:30:00', 'Kids', 30, 'B', 0 );
+INSERT INTO Movie VALUES('SuperMan','03/05/2021 19:15:00', 'Kids', 30, 'A', 0 );
+INSERT INTO Movie VALUES('SuperMan','01/17/2021 20:30:00', 'Kids', 30, 'F', 0 );
+INSERT INTO Movie VALUES('SuperMan','04/25/2021 22:00:00', 'Kids', 30, 'D', 0 );
+INSERT INTO Movie VALUES('Rambo','01/03/2021 22:30:00', 'Action', 45, 'D', 8 );
+INSERT INTO Movie VALUES('Rambo','02/20/2021 21:00:00', 'Action', 45, 'A', 8 );
+INSERT INTO Movie VALUES('Rambo','03/17/2021 20:15:00', 'Action', 45, 'B', 8 );
+INSERT INTO Movie VALUES('Rambo','01/16/2021 12:15:00', 'Action', 45, 'Z', 8 );
+INSERT INTO Movie VALUES('Rambo','01/19/2021 19:30:00', 'Action', 45, 'F', 8 );
+INSERT INTO Movie VALUES('SpiderMan','02/19/2021 19:30:00', 'Kids', 35, 'A', 0 );
+INSERT INTO Movie VALUES('SpiderMan','01/02/2021 20:30:00', 'Kids', 35, 'B', 0 );
+INSERT INTO Movie VALUES('SpiderMan','03/07/2021 21:00:00', 'Kids', 35, 'D', 0 );
+INSERT INTO Movie VALUES('SpiderMan','04/24/2021 17:15:00', 'Kids', 35, 'F', 0 );
+INSERT INTO Movie VALUES('SpiderMan','05/25/2021 19:45:00', 'Kids', 35, 'C', 0 );
+INSERT INTO Movie VALUES('ScaryMovie4','01/02/2021 19:45:00', 'Comedy', 40, 'C', 14 );
+INSERT INTO Movie VALUES('ScaryMovie4','01/12/2021 19:45:00', 'Comedy', 40, 'D', 14 );
+INSERT INTO Movie VALUES('ScaryMovie4','05/04/2021 19:45:00', 'Comedy', 40, 'Z', 14 );
+INSERT INTO Movie VALUES('ScaryMovie4','03/05/2021 19:45:00', 'Comedy', 40, 'A', 14 );
+INSERT INTO Movie VALUES('ScaryMovie4','02/25/2021 19:45:00', 'Comedy', 40, 'B', 14 );
+INSERT INTO Movie VALUES('Titanic','01/05/2021 19:45:00', 'Romantic', 60, 'B', 14 );
+INSERT INTO Movie VALUES('Titanic','04/05/2021 19:45:00', 'Romantic', 60, 'A', 14 );
+INSERT INTO Movie VALUES('Titanic','03/24/2021 19:45:00', 'Romantic', 60, 'C', 14 );
+INSERT INTO Movie VALUES('Titanic','1/19/2021 19:45:00', 'Romantic', 60, 'E', 14 );
+INSERT INTO Movie VALUES('Titanic','04/17/2021 19:45:00', 'Romantic', 60, 'D', 14 );
+INSERT INTO Movie VALUES('Fast&Furious','01/01/2021 19:45:00', 'Action', 50, 'D', 14 );
+INSERT INTO Movie VALUES('Fast&Furious','01/25/2021 17:30:00', 'Action', 50, 'A', 14 );
+INSERT INTO Movie VALUES('Fast&Furious','02/24/2021 20:45:00', 'Action', 50, 'B', 14 );
+INSERT INTO Movie VALUES('Fast&Furious','03/03/2021 21:30:00', 'Action', 50, 'E', 14 );
+INSERT INTO Movie VALUES('Fast&Furious','05/04/2021 22:00:00', 'Action', 50, 'Z', 14 );
+INSERT INTO Movie VALUES('Pokemon','01/02/2021 22:00:00', 'Kids', 34, 'Z', 0 );
+INSERT INTO Movie VALUES('Pokemon','02/24/2021 19:30:00', 'Kids', 34, 'A', 0 );
+INSERT INTO Movie VALUES('Pokemon','03/19/2021 17:15:00', 'Kids', 34, 'B', 0 );
+INSERT INTO Movie VALUES('Pokemon','05/14/2021 21:15:00', 'Kids', 34, 'C', 0 );
+INSERT INTO Movie VALUES('Pokemon','06/17/2021 15:30:00', 'Kids', 34, 'D', 0 );

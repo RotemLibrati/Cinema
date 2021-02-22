@@ -1,0 +1,17 @@
+drop table Stage
+
+USE tempdb
+GO
+
+CREATE TABLE Stage(
+StageName nvarchar(50) NOT NULL,
+NumberSeats int NOT NULL,
+primary key(StageName)
+);
+
+INSERT INTO stage VALUES('A',110);
+INSERT INTO stage VALUES('B',100);
+INSERT INTO stage VALUES('C',90);
+INSERT INTO stage VALUES('D',120);
+INSERT INTO stage VALUES('E',110);
+INSERT INTO stage VALUES('F',120);

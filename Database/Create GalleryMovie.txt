@@ -1,0 +1,20 @@
+--drop table GalleryMovie
+
+USE tempdb
+GO
+
+CREATE TABLE GalleryMovie(
+MovieName nvarchar(50) NOT NULL
+primary key(MovieName)
+);
+
+
+INSERT INTO GalleryMovie VALUES('PrisonBreak');
+INSERT INTO GalleryMovie VALUES('Pokemon');
+INSERT INTO GalleryMovie VALUES('BatMan');
+INSERT INTO GalleryMovie VALUES('SpiderMan');
+INSERT INTO GalleryMovie VALUES('ScaryMovie4');
+INSERT INTO GalleryMovie VALUES('Rambo');
+INSERT INTO GalleryMovie VALUES('Titanic');
+INSERT INTO GalleryMovie VALUES('Fast&Furious');
+INSERT INTO GalleryMovie VALUES('SuperMan');

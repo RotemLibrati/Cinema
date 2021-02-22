@@ -1,0 +1,19 @@
+drop table RegisterUser;
+
+USE tempdb
+GO 
+CREATE TABLE RegisterUser (
+
+	FirstName varchar(100) NOT NULL,
+	LastName varchar(100) NOT NULL,
+	BirthDate Date NOT NULL,
+	Email varchar(100) NOT NULL,
+	Password varchar(500) NOT NULL,
+	PRIMARY KEY(Email),
+	);
+
+
+GO
+SET ANSI_PADDING OFF
+
+
